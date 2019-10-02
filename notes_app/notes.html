@@ -1,0 +1,26 @@
+<!-- Enter your HTML code here -->
+<head>
+    <h1>Simple Notes App</h1>
+</head>
+
+<body>
+  <div>
+      <p>Type some notes in the box below (max len is 280 chars).</p>
+      <p>When you're done click "Save".</p>
+  </div>
+  <div>
+    <form action="javascript:void(0);">
+    <div>
+    <textarea id="new_note" placeholder="Enter new note here" maxlength="280" rows='4'></textarea>
+    <button class="savebutton" id="add_note">Save</button>
+    </div>
+    </form>
+  </div>
+<div id='notes_info' style="display:none;">
+<h3>Existing Notes</h3>
+  <p>Just click the text of a note if you need to edit it!</p>
+  <div id='existing_notes'>
+  </div>
+<div>
+</body>
+
