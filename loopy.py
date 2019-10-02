@@ -1,4 +1,3 @@
-import dis
 
 
 
@@ -16,13 +15,6 @@ def get_elems(input_data, given_index, llen):
                 return given_index + i + 1
     return -1
 
-
-#def predictAnswer(stockData, queries):
-#    real_input = [(stockData, x-1) for x in queries]   
-#    res = []
-#    with Pool(multiprocessing.cpu_count()) as p:
-#        res.append(p.starmap(predict, real_input))
-#    return res[0]
 
 def predictAnswer(stockData, queries):
     res = []
@@ -61,7 +53,6 @@ if __name__ == "__main__":
     #expected = [2,4,-1]
     #queries = [3, 1, 8]
     res = predictAnswer(input_data, queries)
-    print(dis.dis(predictAnswer))
     print(expected)
     print(res)
 
