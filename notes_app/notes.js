@@ -1,5 +1,6 @@
-// maybe hacky?
+// global vars
 var note_count = 0
+var c_index = 0
 
 document.getElementById("add_note").addEventListener("click", function(){
     /*
@@ -21,13 +22,9 @@ document.getElementById("add_note").addEventListener("click", function(){
         to_hide = document.getElementById("notes_info");
         to_hide.style.display = 'inline';
     }
-    var new_div = get_new_div(newmessage)
+    var new_div = get_new_div()
     // create new textarea & delete button
-    var new_note = document.createElement("textarea");
-    new_note.readonly = 'true';
-    new_note.rows = '4'
-    new_note.value = newmessage;
-    new_note.className = 'inserted_node';
+    var new_note = create_new_textarea(newmessage);
     var delbutton = get_delete_button();
     /// add note & button to div
     new_div.appendChild(new_note);
@@ -39,16 +36,36 @@ document.getElementById("add_note").addEventListener("click", function(){
 });
 
 
-function get_new_div(newmessage) {
-    // return a new div for a new note
+function create_new_textarea(newmessage) {
+    /* 
+     Create new textare, set rows to 4 and insert new message
+    */
+    var new_note = document.createElement("textarea");
+    new_note.readonly = 'true';
+    new_note.rows = '4'
+    new_note.value = newmessage;
+    new_note.className = 'inserted_node';
+    return new_note
+};
+
+
+function get_new_div() {
+    /* 
+    Return a new div for a new note
+    */
     var new_div = document.createElement("div");
     new_div.style.backgroundColor = pick_colour()
     new_div.className = "noteDiv"
     return new_div
 };
 
+
 function get_delete_button(){
-    
+    /*
+    Create & return a new delete button:
+    define an onclick func to remove the node and decrement the count of active notes
+    */
+
     var delbutton = document.createElement("button");
     var button_text = document.createTextNode("Delete");
     delbutton.onclick = function(){
@@ -71,10 +88,19 @@ function get_delete_button(){
 
 function pick_colour() {
     /*
-    just return a random colour for now.
-    todo: replace with a cycle/round robin solution
+    Return the next colour based on a global
+    index - allows for always alternating colours
+    (until a user deletes one)
     */
-    var colours =  ["#fdff7a", "#87e0df", "#ffc05c"]; 
-    return colours[Math.floor(Math.random() * colours.length)];
+    var colours = ["#88a3ad", "#aab9bd", "#cccaca", "#f0eceb", "#f0e4dd"];
+    // picked them from https://www.color-hex.com/color-palette/77356
+    new_colour = colours[c_index];
+    if (c_index < (colours.length - 1)){
+        c_index += 1;
+    }
+    else{
+        c_index = 0;
+    }
+    return new_colour;
 };
 
